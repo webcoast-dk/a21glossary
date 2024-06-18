@@ -147,14 +147,8 @@ class Processor
             return $content;
         }
 
-        if (GeneralUtility::inList($this->config['excludePages'], $this->pageId)) {
-            if ($this->config['excludePages'][$this->pageId]) {
-                // disable glossary only for certain glossary types
-                $this->config['excludeTypes'] .= ',' . $this->config['excludePages'][$this->pageId];
-            } else {
-                // disable glossary completly on current page: stop glossary rendering immediately
-                return $content;
-            }
+        if (is_string($this->config['excludePages']) && GeneralUtility::inList($this->config['excludePages'], $this->pageId)) {
+            return $content;
         }
 
         $items = $this->fetchGlossaryItems($this->config['pidList']);
@@ -414,7 +408,6 @@ class Processor
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_a21glossary_main');
 
         $query = $connection->createQueryBuilder();
-        $query->getRestrictions()->removeAll();
         $query = $query->select('*')->from('tx_a21glossary_main')
             ->where(
                 $query->expr()->in('pid', $aPidList),

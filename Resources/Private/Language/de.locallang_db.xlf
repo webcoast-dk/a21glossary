@@ -8,6 +8,10 @@
 				<source>Glossary</source>
 				<target>Glossar</target>
 			</trans-unit>
+			<trans-unit id="tx_a21glossary_main.entry">
+				<source>Glossary entry</source>
+				<target>Glossareintrag</target>
+			</trans-unit>
 			<trans-unit id="tx_a21glossary_main.short">
 				<source>Short form</source>
 				<target>Kurzform</target>

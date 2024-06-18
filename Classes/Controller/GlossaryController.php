@@ -3,6 +3,7 @@
 namespace WapplerSystems\A21glossary\Controller;
 
 use GeorgRinger\NumberedPagination\NumberedPagination;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -13,14 +14,10 @@ use WapplerSystems\A21glossary\Domain\Repository\GlossaryRepository;
 
 class GlossaryController extends ActionController
 {
-    /**
-     * @var \WapplerSystems\A21glossary\Domain\Repository\GlossaryRepository
-     */
-    protected $glossaryRepository;
 
-    public function injectGlossaryRepository(GlossaryRepository $glossaryRepository)
+    public function __construct(readonly GlossaryRepository $glossaryRepository)
     {
-        $this->glossaryRepository = $glossaryRepository;
+
     }
 
     /**
@@ -28,7 +25,7 @@ class GlossaryController extends ActionController
      *
      * @throws InvalidQueryException
      */
-    public function indexAction($char = null)
+    public function indexAction($char = null): ResponseInterface
     {
         if (!empty($char)) {
             $glossaryItems = $this->glossaryRepository->findAllWithChar($char);
@@ -54,6 +51,8 @@ class GlossaryController extends ActionController
         $this->view->assign('index', $this->glossaryRepository->findAllForIndex());
         $this->view->assign('currentChar', $char);
         $this->view->assign('pagination', ['pagination' => $pagination, 'paginator' => $paginator]);
+
+        return $this->htmlResponse();
     }
 
     /**
@@ -61,18 +60,23 @@ class GlossaryController extends ActionController
      *
      * @throws InvalidQueryException
      */
-    public function searchAction($q)
+    public function searchAction($q): ResponseInterface
     {
         $this->view->assign('q', $q);
         $this->view->assign('items', $this->glossaryRepository->findAllWithQuery($q));
+
+        return $this->htmlResponse();
     }
 
     /**
      * @param Glossary $entry
      * @return void
      */
-    public function showAction(Glossary $entry) {
+    public function showAction(Glossary $entry): ResponseInterface
+    {
 
         $this->view->assign('item', $entry);
+
+        return $this->htmlResponse();
     }
 }

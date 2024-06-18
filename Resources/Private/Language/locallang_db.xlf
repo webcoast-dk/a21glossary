@@ -7,6 +7,9 @@
 			<trans-unit id="tx_a21glossary_main">
 				<source>Glossary</source>
 			</trans-unit>
+			<trans-unit id="tx_a21glossary_main.entry">
+				<source>Glossary entry</source>
+			</trans-unit>
 			<trans-unit id="tx_a21glossary_main.short">
 				<source>Short form</source>
 			</trans-unit>

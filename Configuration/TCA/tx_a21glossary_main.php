@@ -2,7 +2,7 @@
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:a21glossary/Resources/Private/Language/locallang_db.xml:tx_a21glossary_main',
+        'title' => 'LLL:EXT:a21glossary/Resources/Private/Language/locallang_db.xlf:tx_a21glossary_main.entry',
         'label' => 'short',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -19,8 +19,11 @@ return [
             'endtime' => 'endtime',
             'fe_group' => 'fe_group'
         ],
-        'iconfile' => 'EXT:a21glossary/Resources/Public/Icons/Extension.svg.svg',
-        'searchFields' => 'short,shortcut,longversion'
+        'iconfile' => 'EXT:a21glossary/Resources/Public/Icons/Extension.svg',
+        'searchFields' => 'short,shortcut,longversion',
+        'security' => [
+            'ignorePageTypeRestriction' => true
+        ]
     ],
     'columns' => [
         'sys_language_uid' => [
